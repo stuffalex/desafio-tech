@@ -1,12 +1,6 @@
-from flask import Flask, request, jsonify
+import os
+from model.tables import Fornecedor
 
-@app.route('/api/filtrar_fornecedores', methods=['POST'])
-def filtrar_fornecedores():
-    data = request.get_json()
-    consumo_mensal = data.get('consumo', 0)
-    # lógica para buscar fornecedores com base no consumo mensal
-    fornecedores = buscar_fornecedores_por_consumo_mensal(consumo_mensal)
-    return jsonify(fornecedores)
 
 def buscar_fornecedores_por_consumo_mensal(consumo_mensal):
     # Suponha que você tenha uma lista ou banco de dados de fornecedores
@@ -16,3 +10,26 @@ def buscar_fornecedores_por_consumo_mensal(consumo_mensal):
         if float(consumo_mensal) >= fornecedor.limiteMinimoKwh:
             fornecedores_final.append(fornecedor)
     return fornecedores_final
+
+
+
+def popular_fornecedores():
+    file_path = os.path.join('app', 'data', 'fornecedores.txt')
+    with open(file_path, 'r') as file:
+        fornecedores = file.readlines()
+
+    for fornecedor in fornecedores:
+        name, custokwh, limiteMinimoKwh, ufOrigem, logo = fornecedor.strip().split(',')
+
+        novo_fornecedor = Fornecedor(
+            name=name,
+            custoKwh=float(custokwh),
+            limiteMinimoKwh=float(limiteMinimoKwh),
+            ufOrigem=ufOrigem,
+            logo=logo
+        )
+
+        db.session.add(novo_fornecedor)
+
+    db.session.commit()
+    return "Fornecedores populados com sucesso!"

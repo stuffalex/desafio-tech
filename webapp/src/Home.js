@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { Container, Button, Row, Col, Form } from 'react-bootstrap';
 import { useNavigate } from 'react-router-dom';
 import Navbar from './Barra';
-import logo from './logo4.png';
 
 function Home() {
     const [consumo, setConsumo] = useState('');
