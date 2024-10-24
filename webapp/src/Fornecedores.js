@@ -9,7 +9,7 @@ import logo from './logo4.png';
         useEffect(() => {
           const fetchFornecedores = async () => {
             try {
-              const response = await fetch('https://desafio-tech-back.vercel.app/api/fornecedores');
+                const response = await fetch('https://flask-al215y3sr-alexyas-projects.vercel.app/api/fornecedores');
               if (!response.ok) {
                 throw new Error('Erro ao carregar fornecedores');
               }
