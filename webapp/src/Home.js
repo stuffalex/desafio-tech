@@ -13,12 +13,12 @@ function Home() {
 
     const handleCalcular = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/filtrar_fornecedores', {
+            const response = await fetch('http://127.0.0.1:5000/api/fornecedores_por_consumo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
-                body: JSON.stringify({ consumo }),
+                body: JSON.stringify({ consumo_mensal: consumo }),
             });
 
             if (!response.ok) {

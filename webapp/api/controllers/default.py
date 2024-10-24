@@ -1,4 +1,4 @@
-from flask import Blueprint, jsonify, current_app
+from flask import Blueprint, jsonify, current_app, request
 import logging
 
 from model.tables import Cliente
@@ -11,9 +11,6 @@ logging.basicConfig(level=logging.DEBUG)
 def listar_fornecedores():
     from services.fornecedores_service import obter_fornecedores_com_info_de_clientes
     fornecedores_list= obter_fornecedores_com_info_de_clientes()
-    # from model.tables import Fornecedor
-    #
-    # fornecedores_list = Fornecedor.query.all()
     return jsonify(fornecedores_list)
 
 @default_bp.route('/api/popular_banco', methods=['POST'])
@@ -60,11 +57,16 @@ def popular_banco():
         return []
 
 @default_bp.route('/api/fornecedores_por_consumo', methods=['POST'])
-def listar_fornecedores_por_consumo_mensal(consumo_mensal):
-    with current_app.app_context():
-        from services.fornecedores_service import buscar_fornecedores_por_consumo_mensal
-        fornecedores_filtrados = buscar_fornecedores_por_consumo_mensal(consumo_mensal)
-        return jsonify(fornecedores_filtrados)
+def listar_fornecedores_por_consumo_mensal():
+    data = request.get_json()
+    consumo_mensal = data.get('consumo_mensal')
+
+    if consumo_mensal is None:
+        return jsonify({"error": "consumo_mensal is required"}), 400
+
+    from services.fornecedores_service import buscar_fornecedores_por_consumo_mensal
+    fornecedores_filtrados = buscar_fornecedores_por_consumo_mensal(consumo_mensal)
+    return jsonify(fornecedores_filtrados)
 
 @default_bp.route('/')
 def home():
