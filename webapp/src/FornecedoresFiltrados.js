@@ -15,7 +15,7 @@ function FornecedoresFiltrados() {
 
     const handleCalcular = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/fornecedores_por_consumo', {
+            const response = await fetch('https://desafio-tech-back.vercel.app/api/fornecedores_por_consumo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
