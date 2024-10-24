@@ -1,0 +1,15 @@
+ClienteFornecedor;5;1;1
+ClienteFornecedor;4;2;2
+ClienteFornecedor;3;3;3
+ClienteFornecedor;4;4;4
+ClienteFornecedor;5;5;5
+ClienteFornecedor;3;6;6
+ClienteFornecedor;2;7;1
+ClienteFornecedor;5;8;2
+ClienteFornecedor;4;9;3
+ClienteFornecedor;3;10;4
+ClienteFornecedor;5;11;5
+ClienteFornecedor;2;12;6
+ClienteFornecedor;4;13;1
+ClienteFornecedor;3;14;2
+ClienteFornecedor;5;15;3

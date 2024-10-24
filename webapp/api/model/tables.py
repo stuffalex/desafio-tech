@@ -1,4 +1,4 @@
-from webapp.api import db
+from api import db
 
 
 class Fornecedor(db.Model):
@@ -7,14 +7,14 @@ class Fornecedor(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     nome = db.Column(db.String, unique=True)
     logo = db.Column(db.String)
-    custokwh = db.Column(db.Numeric)
+    custoKwh = db.Column(db.Numeric)
     limiteMinimoKwh = db.Column(db.Numeric)
     ufOrigem = db.Column(db.String)
 
     def __init__(self,nome, logo, custoKwh, limiteMinimoKwh, ufOrigem):
         self.nome = nome
         self.logo = logo
-        self.custokwh = custoKwh
+        self.custoKwh = custoKwh
         self.limiteMinimoKwh = limiteMinimoKwh
         self.ufOrigem = ufOrigem
 
@@ -38,7 +38,7 @@ class Cliente(db.Model):
         return "<Cliente %r>" % self.nome
 
 class ClienteFornecedor(db.Model):
-    __tablename__ = "clientes fornecedores"
+    __tablename__ = "clientes_fornecedores"
 
     id = db.Column(db.Integer, primary_key=True)
     rating = db.Column(db.Numeric)

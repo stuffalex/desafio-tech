@@ -1,0 +1,6 @@
+Fornecedor;Energisa;logo1.png;0.50;100;MS
+Fornecedor;NeoEnergia;logo2.png;0.45;120;SP
+Fornecedor;CPFL;logo3.png;0.55;80;RJ
+Fornecedor;Light;logo4.png;0.52;90;MG
+Fornecedor;Elektro;logo5.png;0.49;110;PR
+Fornecedor;Cemig;logo6.png;0.51;95;RS

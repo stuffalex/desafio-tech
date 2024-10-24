@@ -1,35 +1,43 @@
-import os
-from model.tables import Fornecedor
+from api import db
 
+from sqlalchemy import func
+from model.tables import Fornecedor, ClienteFornecedor
 
 def buscar_fornecedores_por_consumo_mensal(consumo_mensal):
-    # Suponha que você tenha uma lista ou banco de dados de fornecedores
-    fornecedores = Fornecedor.query.all()  # Exemplo de como pegar fornecedores do banco
+    fornecedores = Fornecedor.query.all()
     fornecedores_final = []
     for fornecedor in fornecedores:
         if float(consumo_mensal) >= fornecedor.limiteMinimoKwh:
             fornecedores_final.append(fornecedor)
     return fornecedores_final
 
+def obter_fornecedores_com_info_de_clientes():
+    try:
+        resultado = db.session.query(
+            Fornecedor.id,
+            Fornecedor.nome,
+            Fornecedor.custoKwh,
+            Fornecedor.ufOrigem,
+            Fornecedor.logo,
+            func.count(ClienteFornecedor.cliente_id).label('numero_clientes'),
+            func.avg(ClienteFornecedor.rating).label('media_rating')
+        ).outerjoin(ClienteFornecedor, Fornecedor.id == ClienteFornecedor.fornecedor_id) \
+            .group_by(Fornecedor.id).all()
 
+        fornecedores = [
+            {
+                "id": row.id,
+                "nome": row.nome,
+                "custokwh": row.custoKwh,
+                "ufOrigem": row.ufOrigem,
+                "logo": row.logo,
+                "numero_clientes": row.numero_clientes,
+                "media_rating": row.media_rating
+            }
+            for row in resultado
+        ]
+    except Exception as e:
+        print(f"Error retrieving suppliers: {e}")
+        return []
 
-def popular_fornecedores():
-    file_path = os.path.join('app', 'data', 'fornecedores.txt')
-    with open(file_path, 'r') as file:
-        fornecedores = file.readlines()
-
-    for fornecedor in fornecedores:
-        name, custokwh, limiteMinimoKwh, ufOrigem, logo = fornecedor.strip().split(',')
-
-        novo_fornecedor = Fornecedor(
-            name=name,
-            custoKwh=float(custokwh),
-            limiteMinimoKwh=float(limiteMinimoKwh),
-            ufOrigem=ufOrigem,
-            logo=logo
-        )
-
-        db.session.add(novo_fornecedor)
-
-    db.session.commit()
-    return "Fornecedores populados com sucesso!"
+    return fornecedores

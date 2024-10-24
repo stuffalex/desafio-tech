@@ -26,9 +26,7 @@ function Home() {
             }
 
             const data = await response.json();
-            // Navega para a tela de fornecedores filtrados com o estado do consumo
-            navigate('/fornecedores', { state: { consumo: data } });
-
+            navigate('/fornecedoresFiltrados', { state: { consumo: data } });
         } catch (error) {
             console.error('Erro ao calcular:', error);
         }
@@ -41,8 +39,8 @@ function Home() {
                 <Row>
                     <Col md={6}>
                         <h2>Bem-vindo ao nosso site</h2>
-                        <Button variant="primary" href="fornecedores">
-                            Ver Fornecedores
+                        <Button variant="primary" onClick={() => navigate('/fornecedores')}>
+                          Ver Fornecedores
                         </Button>
                     </Col>
                 </Row>

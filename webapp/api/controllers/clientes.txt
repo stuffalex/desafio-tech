@@ -1,0 +1,15 @@
+Cliente;Maria Fernanda;150;MS
+Cliente;João da Silva;200;SP
+Cliente;Ana Paula;180;RJ
+Cliente;Carlos Eduardo;250;MG
+Cliente;Fernanda Souza;100;PR
+Cliente;Bruno Oliveira;120;RS
+Cliente;Carla Mendes;210;MS
+Cliente;Eduardo Lima;140;SP
+Cliente;Patrícia Andrade;170;RJ
+Cliente;Marcelo Torres;190;MG
+Cliente;Beatriz Silva;220;PR
+Cliente;Rafael Costa;230;RS
+Cliente;Isabela Martins;110;MS
+Cliente;Rodrigo Sanches;160;SP
+Cliente;Camila Lima;130;RJ

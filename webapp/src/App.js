@@ -1,20 +1,24 @@
 
 import React from 'react';
-import { Routes, Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import Home from './Home';
-import Fornecedores from './Fornecedores';
-import FornecedoresFiltrados from './FornecedoresFiltrados';
+//import Fornecedores from './Fornecedores';
+//import FornecedoresFiltrados from './FornecedoresFiltrados';
 
 function App() {
+
+
   return (
+  <div><p>OLÁ</p></div>
     <Router>
       <Routes>
-        <Route path="/" element={<Home />} />
-        <Route path="/fornecedores" element={<Fornecedores />} />
-        <Route path="/fornecedoresFiltrados" element={<FornecedoresFiltrados />} />
+        <Route path="/"><Home /> </Route>
+//        <Route path="/fornecedores"><Fornecedores/></Route>
+//        <Route path="/fornecedoresFiltrados"><FornecedoresFiltrados /></Route>
       </Routes>
     </Router>
   );
 }
 
 export default App;
+
