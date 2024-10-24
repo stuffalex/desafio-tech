@@ -19,38 +19,43 @@ def popular_banco():
         fornecedores = []
         clientes = []
         clientes_fornecedores=[]
-        print('oi')
-        with open('C:/desafio/desafio-tech/webapp/api/controllers/clienteFornecedor.txt', 'r', encoding='utf-8') as arquivo:
-            for linha in arquivo:
-                print('oie')
-                dados = linha.strip().split(';')
-                tipo = dados[0]
-                print(dados[1], dados[2], dados[3])
+    
+            with open('./Fornecedor.txt', 'r', encoding='utf-8') as arquivo:
+                for linha in arquivo:
+                    dados = linha.strip().split(';')
+                    tipo = dados[0]
 
-                if tipo == "Fornecedor":
-                    from model.tables import Fornecedor
-                    print(dados[1], dados[2], dados[3], dados[4],dados[5])
-                    fornecedor = Fornecedor(dados[1], dados[2], dados[3], dados[4],dados[5])
-                    fornecedores.append(fornecedor)
-                    db.session.add(fornecedor)
+                    if  tipo == "Fornecedor":
+                        from model.tables import Fornecedor
+                        print(dados[1], dados[2], dados[3], dados[4],dados[5])
+                        fornecedor = Fornecedor(dados[1], dados[2], dados[3], dados[4],dados[5])
+                        fornecedores.append(fornecedor)
+                        db.session.add(fornecedor)
 
-                elif tipo == "Cliente":
-                    from model.tables import Cliente
-                    cliente = Cliente(dados[1], dados[2], dados[3])
-                    clientes.append(cliente)
-                    db.session.add(cliente)
+             with open('./cliente.txt', 'r', encoding='utf-8') as arquivo:
+                for linha in arquivo:
+                    dados = linha.strip().split(';')
+                    tipo = dados[0]
 
-                elif tipo == "ClienteFornecedor":
-                    from model.tables import ClienteFornecedor
-                    cliente_fornecedor = ClienteFornecedor(dados[1], dados[2], dados[3])
-                    clientes_fornecedores.append(cliente_fornecedor)
-                    db.session.add(cliente_fornecedor)
+                    if tipo == "Cliente":
+                        from model.tables import Cliente
+                        cliente = Cliente(dados[1], dados[2], dados[3])
+                        clientes.append(cliente)
+                        db.session.add(cliente)
 
+            with open('./clienteFornecedor.txt', 'r', encoding='utf-8') as arquivo:
+                for linha in arquivo:
+                    dados = linha.strip().split(';')
+                    tipo = dados[0]
+
+                    if tipo == "ClienteFornecedor":
+                        from model.tables import ClienteFornecedor
+                        cliente_fornecedor = ClienteFornecedor(dados[1], dados[2], dados[3])
+                        clientes_fornecedores.append(cliente_fornecedor)
+                        db.session.add(cliente_fornecedor)
+            
         db.session.commit()
 
-        print(fornecedores)
-        print(clientes)
-        print(clientes_fornecedores)
         return "sucess", 200
     except Exception as e:
         print(f"Error retrieving suppliers: {e}")
