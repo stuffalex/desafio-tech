@@ -34,6 +34,13 @@ function FornecedoresFiltrados() {
         }
     };
 
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleCalcular();
+        }
+    };
+
     return (
         <div>
             <Navbar />
@@ -47,6 +54,7 @@ function FornecedoresFiltrados() {
                                 placeholder="Ex: 150kWh"
                                 value={consumoLocal}
                                 onChange={handleInputChange}
+                                onKeyDown={handleKeyDown}
                             />
                         </Form.Group>
                         <Button variant="primary" onClick={handleCalcular}>
@@ -67,7 +75,7 @@ function FornecedoresFiltrados() {
                                         <th>Nome fornecedor</th>
                                         <th>Custo kWh</th>
                                         <th>Limite Mínimo kWh</th>
-                                        <th>Numero de clientes</th>
+                                        <th>Número de clientes</th>
                                         <th>Nota média</th>
                                         <th>UF de Origem</th>
                                     </tr>
@@ -92,7 +100,7 @@ function FornecedoresFiltrados() {
                      </Row>
                      </div>
                    ) : (
-                    <h3 className="mt-3">Nenhum fornecedor encontrado para o consumo informado.</h3> // Message for no suppliers found
+                    <h3 className="mt-3">Nenhum fornecedor encontrado para o consumo informado.</h3>
                 )}
             </Container>
         </div>

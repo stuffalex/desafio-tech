@@ -10,7 +10,7 @@ def create_app():
     app = Flask(__name__)
     app.config.from_object('config')
 
-    CORS(app)
+    CORS(app, resources={r"/api/*": {"origins": ["http://localhost:3000", "http://127.0.0.1:5000","https://desafio-tech-bice.vercel.app", "https://desafio-tech-back.vercel.app"]}})
 
     db.init_app(app)
     migrate.init_app(app, db)

@@ -13,7 +13,7 @@ function Home() {
 
     const handleCalcular = async () => {
         try {
-            const response = await fetch('http://127.0.0.1:5000/api/fornecedores_por_consumo', {
+            const response = await fetch('https://desafio-tech-back.vercel.app/api/fornecedores_por_consumo', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -29,6 +29,13 @@ function Home() {
             navigate('/fornecedoresFiltrados', { state: { consumo: data } });
         } catch (error) {
             console.error('Erro ao calcular:', error);
+        }
+    };
+
+    const handleKeyDown = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            handleCalcular();
         }
     };
 
@@ -48,8 +55,14 @@ function Home() {
                     <Form>
                         <Form.Group className="mb-3" controlId="formLogin">
                             <Form.Label>Consumo mensal em Kwh</Form.Label>
-                            <Form.Control type="text" placeholder="Ex: 150kWh" value={consumo} onChange={handleInputChange} />
-                        </Form.Group>
+                            <Form.Control
+                                type="text"
+                                placeholder="Ex: 150kWh"
+                                value={consumo}
+                                onChange={handleInputChange}
+                                onKeyDown={handleKeyDown}
+                            />
+                            </Form.Group>
                         <Button variant="primary" onClick={handleCalcular}>
                             Calcular Fornecedores
                         </Button>
