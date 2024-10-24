@@ -15,9 +15,5 @@
       "src": "/fornecedores",
       "dest": "/api/fornecedores"
     }
-  ],
-  {
-    "src": "/fornecedores",
-    "dest": "/api/fornecedores"
-  }
+  ]
 }
